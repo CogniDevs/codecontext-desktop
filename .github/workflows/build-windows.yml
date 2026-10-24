@@ -1,0 +1,73 @@
+name: Build Windows
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    name: Build Windows Binary
+    runs-on: windows-latest
+    steps:
+      - name: Checkout desktop
+        uses: actions/checkout@v4
+        with:
+          path: codecontext-desktop
+
+      - name: Checkout core
+        uses: actions/checkout@v4
+        with:
+          repository: CogniDevs/codecontext-core
+          token: ${{ secrets.CORE_READ_TOKEN || secrets.GITHUB_TOKEN }}
+          path: codecontext-core
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Download and Unpack UI bundle
+        env:
+          GH_TOKEN: ${{ secrets.CORE_READ_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          cd codecontext-desktop
+          New-Item -ItemType Directory -Force -Path dist_ui
+          $tmpZip = "$env:TEMP\frontend-dist.zip"
+          $tmpExtract = "$env:TEMP\extracted_ui"
+          
+          # Скачиваем релиз фронтенда
+          gh release download latest-ui --repo CogniDevs/codecontext-web --pattern "frontend-dist.zip" --dir "$env:TEMP" || true
+          
+          if (Test-Path $tmpZip) {
+            Expand-Archive -Path $tmpZip -DestinationPath $tmpExtract -Force
+            # Если внутри архива была поддиректория (например, browser/ или dist/), поднимаем файлы
+            $indexPath = Get-ChildItem -Path $tmpExtract -Filter "index.html" -Recurse | Select-Object -First 1
+            if ($indexPath) {
+              Copy-Item -Path "$($indexPath.DirectoryName)\*" -Destination "dist_ui\" -Recurse -Force
+            } else {
+              Copy-Item -Path "$tmpExtract\*" -Destination "dist_ui\" -Recurse -Force
+            }
+          }
+        shell: pwsh
+
+      - name: Build release
+        run: |
+          cd codecontext-desktop
+          cargo build --release
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CodeContext_Windows.exe
+          path: codecontext-desktop/target/release/codecontext-desktop.exe
+
+      - name: Publish to Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: codecontext-desktop/target/release/codecontext-desktop.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

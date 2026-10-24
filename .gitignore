@@ -1,25 +1,7 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.pyd
-*.so
-*.dylib
-*.dll
-.venv/
-venv/
-ENV/
-
-# PyInstaller build output
-/build/
-/dist/
-*.spec
-
-# UI static cache (скачивается в CI)
-/dist_ui/
+/target
+/dist_ui/*
+!/dist_ui/index.html
 frontend-dist.zip
-
-# IDE and OS
 .idea/
 .vscode/
 .DS_Store
