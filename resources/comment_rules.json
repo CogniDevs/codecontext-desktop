@@ -1,0 +1,94 @@
+{
+	"rules": {
+		"c_style": {
+			"extensions": [
+				".js",
+				".jsx",
+				".mjs",
+				".cjs",
+				".ts",
+				".tsx",
+				".mts",
+				".cts",
+				".c",
+				".cpp",
+				".cc",
+				".cxx",
+				".h",
+				".hpp",
+				".hxx",
+				".go",
+				".rs",
+				".java",
+				".cs",
+				".php",
+				".css",
+				".scss",
+				".sass",
+				".less",
+				".dart",
+				".kt",
+				".kts",
+				".swift",
+				".shader",
+				".cginc",
+				".hlsl",
+				".glsl",
+				".m"
+			],
+			"pattern": "(\"(?:\\\\.|[^\"\\\\])*\")|('(?:\\\\.|[^'\\\\])*')|(`(?:\\\\.|[^`\\\\])*`)|(//.*?$)|(/\\*[\\s\\S]*?\\*/)"
+		},
+		"python_style": {
+			"extensions": [".py", ".ipynb", ".pyw"],
+			"hash_pattern": "(\"(?:\\\\.|[^\"\\\\])*\")|('(?:\\\\.|[^'\\\\])*')|(#.*?$)",
+			"docstring_pattern": "^\\s*(\"\"\"[\\s\\S]*?\"\"\"|'''[\\s\\S]*?''')\\s*$"
+		},
+		"xml_style": {
+			"extensions": [
+				".html",
+				".htm",
+				".xhtml",
+				".xml",
+				".svelte",
+				".vue",
+				".astro",
+				".svg",
+				".plist",
+				".xaml"
+			],
+			"pattern": "(\"(?:\\\\.|[^\"\\\\])*\")|('(?:\\\\.|[^'\\\\])*')|(<!--[\\s\\S]*?-->)"
+		},
+		"hash_style": {
+			"extensions": [
+				".sh",
+				".bash",
+				".zsh",
+				".yaml",
+				".yml",
+				".toml",
+				".ini",
+				".conf",
+				".cfg",
+				".properties",
+				".dockerfile",
+				".makefile",
+				"makefile",
+				"dockerfile",
+				".rb",
+				".ru",
+				".tf",
+				".tfvars",
+				".cmake",
+				".r",
+				".jl",
+				".pl",
+				".pm"
+			],
+			"pattern": "(\"(?:\\\\.|[^\"\\\\])*\")|('(?:\\\\.|[^'\\\\])*')|(#.*?$)"
+		},
+		"sql_style": {
+			"extensions": [".sql", ".pgsql", ".mysql"],
+			"pattern": "(\"(?:\\\\.|[^\"\\\\])*\")|('(?:\\\\.|[^'\\\\])*')|(--.*?$)|(/\\*[\\s\\S]*?\\*/)"
+		}
+	}
+}
