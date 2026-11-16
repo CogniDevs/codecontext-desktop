@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=CodeContext
+Comment=AI-ready code context compiler and analyzer
+Exec=codecontext-desktop
+Icon=codecontext
+Terminal=false
+Type=Application
+Categories=Development;IDE;
+StartupWMClass=codecontext

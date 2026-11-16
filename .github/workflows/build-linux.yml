@@ -58,7 +58,12 @@ jobs:
       - name: Package archive
         run: |
           cd codecontext-desktop
-          tar -czvf ../CodeContext_Linux.tar.gz -C target/release codecontext-desktop
+          mkdir -p package_linux/bin package_linux/share/applications package_linux/share/icons/hicolor/256x256/apps
+          cp target/release/codecontext-desktop package_linux/
+          cp target/release/codecontext-desktop package_linux/bin/
+          cp resources/codecontext.desktop package_linux/share/applications/
+          cp resources/icons/icon.png package_linux/share/icons/hicolor/256x256/apps/codecontext.png
+          tar -czvf ../CodeContext_Linux.tar.gz -C package_linux .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

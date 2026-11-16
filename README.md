@@ -34,7 +34,10 @@
 ### Для запуска
 - **Windows:** Windows 10/11 (компонент WebView2 Runtime, предустановлен в системе).
 - **macOS:** macOS 11 (Big Sur) или новее.
-- **Linux:** установленные пакеты WebKitGTK (`libwebkit2gtk-4.1` и `libgtk-3`).
+- **Linux:** установленные системные пакеты WebKitGTK и GTK-3:
+  - **Ubuntu / Debian / Mint:** `sudo apt install -y libwebkit2gtk-4.1-0 libgtk-3-0`
+  - **Fedora / RHEL:** `sudo dnf install -y webkit2gtk4.1 gtk3`
+  - **Arch Linux / Manjaro:** `sudo pacman -S webkit2gtk-4.1 gtk3`
 
 ### Для сборки из исходников
 - **Rust:** `stable` (1.78+)
